@@ -734,9 +734,32 @@
         let selectedGame = 'loto6';
         let customHistory = { loto6: [], loto7: [], miniloto: [] };
 
+        // 自動データ同期処理 (共通データベースタワーから取得)
+        async function fetchLatestLotteryData(game) {
+            const urls = {
+                loto6: 'https://tk030-lotto.github.io/common-divisor-lite/data/loto6.json',
+                loto7: 'https://tk030-lotto.github.io/common-divisor-lite/data/loto7.json',
+                miniloto: 'https://tk030-lotto.github.io/common-divisor-lite/data/miniloto.json'
+            };
+            if (!urls[game]) return;
+            try {
+                console.log('Fetching latest data for ' + game + ' from server...');
+                const response = await fetch(urls[game]);
+                if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    LOTO_INIT_DATA[game] = data;
+                    console.log('Successfully synced ' + game + ' with latest data.');
+                }
+            } catch(err) {
+                console.warn('Failed to fetch latest data for ' + game + ': ' + err.message);
+            }
+        }
+
         // ページロード時の初期化
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             loadLocalHistory();
+            await fetchLatestLotteryData('loto6');
         });
 
         // 利用規約同意の処理
@@ -746,11 +769,12 @@
         }
 
         // ゲーム切り替え
-        function selectGame(game, el) {
+        async function selectGame(game, el) {
             selectedGame = game;
             document.querySelectorAll('.game-btn').forEach(btn => btn.classList.remove('active'));
             el.classList.add('active');
             document.getElementById('resultArea').style.display = 'none';
+            await fetchLatestLotteryData(game);
         }
 
         // localStorageから手入力データを読み込み
