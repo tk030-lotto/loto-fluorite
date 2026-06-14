@@ -737,9 +737,9 @@
         // 自動データ同期処理 (共通データベースタワーから取得)
         async function fetchLatestLotteryData(game) {
             const urls = {
-                loto6: 'https://tk030-lotto.github.io/common-divisor-lite/data/loto6.json',
-                loto7: 'https://tk030-lotto.github.io/common-divisor-lite/data/loto7.json',
-                miniloto: 'https://tk030-lotto.github.io/common-divisor-lite/data/miniloto.json'
+                loto6: 'https://tk030-lotto.github.io/lotto-data-hub/data/loto6.json',
+                loto7: 'https://tk030-lotto.github.io/lotto-data-hub/data/loto7.json',
+                miniloto: 'https://tk030-lotto.github.io/lotto-data-hub/data/miniloto.json'
             };
             if (!urls[game]) return;
             try {
