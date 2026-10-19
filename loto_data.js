@@ -1,6 +1,21 @@
 const LOTO_INIT_DATA = {
   "loto6": [
     {
+      "round": 2147,
+      "date": "2026-10-19",
+      "numbers": [
+        9,
+        16,
+        22,
+        23,
+        27,
+        29
+      ],
+      "bonus": [
+        39
+      ]
+    },
+    {
       "round": 2146,
       "date": "2026-10-15",
       "numbers": [
