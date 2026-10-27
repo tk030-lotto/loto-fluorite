@@ -44140,6 +44140,20 @@ const LOTO_INIT_DATA = {
   ],
   "miniloto": [
     {
+      "round": 1410,
+      "date": "2026-10-27",
+      "numbers": [
+        17,
+        18,
+        26,
+        28,
+        30
+      ],
+      "bonus": [
+        23
+      ]
+    },
+    {
       "round": 1409,
       "date": "2026-10-20",
       "numbers": [
